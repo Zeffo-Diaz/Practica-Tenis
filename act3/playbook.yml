@@ -1,0 +1,10 @@
+---
+- hosts:
+  become: true
+  vars:
+   - partido_vars.yml
+  tasks:
+   - name: Generador de archivo .txt
+     include_role:
+       name: tenis
+

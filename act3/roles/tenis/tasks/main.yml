@@ -1,0 +1,18 @@
+---
+- name: Segundo Tenista
+  uri:
+   url: "https://random-data-api.com/api/users/random_users?size=1"
+   return_content: yes
+  register: api_response
+  
+- name: Guardar datos seundo tenista
+  set_fact:
+   second_first_name: "{{ (api_response.content | from_json)[0].first_name }}"
+   second_last_name: "{{ (api_response.content | from_json)[0].last_name }}"
+   second_city: "{{ (api_response.content | from_json)[0].city }}"
+   second_id: "{{ (api_response.content | from_json)[0].id }}"
+
+- name: Crear partido
+   templates:
+    scr: partido.txt.j2
+    dest: /vagrant/partido.txt
